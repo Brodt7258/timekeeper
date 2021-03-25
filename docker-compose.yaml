@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  pg:
+    image: postgres
+    container_name: timekeeper_db
+    ports:
+      - '5401:5433'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=timekeeper
+    volumes:
+      - ./data/pg:/var/lib/postgresql/data
+    networks:
+      - timekeeper
+    restart: always
+
+  pgadmin:
+    container_name: timekeeper_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_SERVER_JSON_FILE: /tmp/.pgadmin/servers.json
+    volumes:
+      - ./data/pgadmin:/tmp/.pgadmin
+    ports:
+      - '${PGADMIN_PORT:-5051}:80'
+    networks:
+      - timekeeper
+    restart: unless-stopped
+
+networks:
+  timekeeper:
+    driver: bridge
