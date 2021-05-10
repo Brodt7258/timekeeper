@@ -3,7 +3,8 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('employees', (tb) => {
       tb.increments('id');
-      tb.integer('company_id').references('id').inTable('companies');
+      tb.integer('company_id').references('id').inTable('companies').nullable();
+      tb.string('role');
       tb.string('name');
       tb.string('email');
       tb.string('password');
