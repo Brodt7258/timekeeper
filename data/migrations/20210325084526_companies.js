@@ -5,12 +5,11 @@ exports.up = function(knex) {
       tb.increments('id');
       tb.string('name');
       tb.string('email');
-      tb.string('password');
       tb.string('phone_number');
       tb.integer('seats');
       tb.integer('last_payment');
       tb.string('avatar_url');
-      tb.integer('default_pay_peroid');
+      tb.integer('default_pay_period');
       tb.integer('last_payday');
       tb.integer('created_at');
     });
