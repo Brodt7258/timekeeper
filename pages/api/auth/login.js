@@ -1,3 +1,1 @@
-export default (req, res) => {
-  
-};
+export default (req, res) => {};
